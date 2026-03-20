@@ -6,11 +6,14 @@ node_modules/
 # Testing
 coverage/
 
-# Next.js
+# Astro
+.astro/
+dist/
+
+# Next.js (legacy)
 .next/
 out/
 build/
-dist/
 
 # Production
 *.log

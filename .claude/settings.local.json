@@ -3,7 +3,24 @@
     "allow": [
       "WebFetch(domain:github.com)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git remote:*)",
+      "Bash(git credential-manager-core:*)",
+      "Bash(git credential:*)",
+      "Bash(rundll32.exe keymgr.dll,KRShowKeyMgr)",
+      "Bash(gh auth login)",
+      "Bash(gh repo view:*)",
+      "Bash(gh auth:*)",
+      "Bash(node:*)",
+      "Bash(npm --version:*)",
+      "Bash(npm create:*)",
+      "Bash(pkill:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }

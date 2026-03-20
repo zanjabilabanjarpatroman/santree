@@ -1,3 +1,6 @@
+---
+// Astro frontmatter
+---
 <!DOCTYPE html>
 <html class="light" lang="id">
 <head>
@@ -23,34 +26,6 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "background": "#fff6dd",
-                        "primary": "#2c6816",
-                        "primary-light": "#b2f893",
-                        "secondary": "#446506",
-                        "secondary-light": "#c7f086",
-                        "tertiary": "#964300",
-                        "tertiary-light": "#ff9655",
-                        "surface": "#fff6dd",
-                        "surface-light": "#faf0d3",
-                        "on-primary": "#d4ffbd",
-                        "on-surface": "#332f1d",
-                        "on-surface-variant": "#615b47",
-                    },
-                    fontFamily: {
-                        "headline": ["Plus Jakarta Sans"],
-                        "body": ["Be Vietnam Pro"],
-                    },
-                },
-            },
-        }
-    </script>
 <style>
         .glass-nav {
             backdrop-filter: blur(12px);
@@ -518,7 +493,7 @@
 
 <script>
 // Waitlist Form Handler
-document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const nama = document.getElementById('namaWaitlist').value.trim();
@@ -530,23 +505,62 @@ document.getElementById('waitlistForm').addEventListener('submit', function(e) {
         return;
     }
 
-    // Show success message
-    document.getElementById('successMessage').classList.remove('hidden');
+    // Disable submit button
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Menyimpan...';
 
-    // Reset form
-    document.getElementById('namaWaitlist').value = '';
-    document.getElementById('emailWaitlist').value = '';
-    document.getElementById('waWaitlist').value = '';
+    try {
+        // Call API
+        const response = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nama,
+                email,
+                whatsapp: wa,
+            }),
+        });
 
-    // Scroll to success message
-    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const result = await response.json();
 
-    // Hide after 10 seconds
-    setTimeout(() => {
-        document.getElementById('successMessage').classList.add('hidden');
-    }, 10000);
+        if (!response.ok) {
+            // Show error
+            alert(result.error || 'Terjadi kesalahan. Coba lagi ya!');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+        }
 
-    console.log('Waitlist signup:', { nama, email, wa });
+        // Show success message
+        document.getElementById('successMessage').classList.remove('hidden');
+
+        // Reset form
+        document.getElementById('namaWaitlist').value = '';
+        document.getElementById('emailWaitlist').value = '';
+        document.getElementById('waWaitlist').value = '';
+
+        // Scroll to success message
+        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Hide after 10 seconds
+        setTimeout(() => {
+            document.getElementById('successMessage').classList.add('hidden');
+        }, 10000);
+
+        // Re-enable button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan. Coba lagi ya!');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    }
 });
 
 // Share to WhatsApp
