@@ -493,12 +493,16 @@
 
 <script>
 // Waitlist Form Handler
-document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+document.getElementById('waitlistForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const nama = document.getElementById('namaWaitlist').value.trim();
-    const email = document.getElementById('emailWaitlist').value.trim();
-    const wa = document.getElementById('waWaitlist').value.trim();
+    const namaInput = document.getElementById('namaWaitlist') as HTMLInputElement;
+    const emailInput = document.getElementById('emailWaitlist') as HTMLInputElement;
+    const waInput = document.getElementById('waWaitlist') as HTMLInputElement;
+
+    const nama = namaInput.value.trim();
+    const email = emailInput.value.trim();
+    const wa = waInput.value.trim();
 
     if (!nama || !email || !wa) {
         alert('Mohon isi semua field!');
@@ -506,7 +510,7 @@ document.getElementById('waitlistForm').addEventListener('submit', async functio
     }
 
     // Disable submit button
-    const submitBtn = this.querySelector('button[type="submit"]');
+    const submitBtn = this.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalText = submitBtn.textContent;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Menyimpan...';
@@ -536,19 +540,19 @@ document.getElementById('waitlistForm').addEventListener('submit', async functio
         }
 
         // Show success message
-        document.getElementById('successMessage').classList.remove('hidden');
+        document.getElementById('successMessage')?.classList.remove('hidden');
 
         // Reset form
-        document.getElementById('namaWaitlist').value = '';
-        document.getElementById('emailWaitlist').value = '';
-        document.getElementById('waWaitlist').value = '';
+        namaInput.value = '';
+        emailInput.value = '';
+        waInput.value = '';
 
         // Scroll to success message
-        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('successMessage')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         // Hide after 10 seconds
         setTimeout(() => {
-            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('successMessage')?.classList.add('hidden');
         }, 10000);
 
         // Re-enable button
@@ -562,19 +566,6 @@ document.getElementById('waitlistForm').addEventListener('submit', async functio
         submitBtn.textContent = originalText;
     }
 });
-
-// Share to WhatsApp
-function shareToWhatsApp() {
-    const text = encodeURIComponent(
-        '🌳 Santree — Belajar Islam jadi petualangan seru!\n\n' +
-        '📚 Al-Qur\'an, Fiqih, Aqidah, Life Skill jadi quest!\n' +
-        '🎴 Kartu fisik - minim screen time\n' +
-        '🎮 Level up dari Batu ke Diamond\n' +
-        '✨ 100% Open Source & Gratis\n\n' +
-        'Untuk anak 8-12 tahun. Daftar waitlist: https://santree.id'
-    );
-    window.open('https://wa.me/?text=' + text, '_blank');
-}
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
