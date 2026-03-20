@@ -1,575 +1,275 @@
 <!DOCTYPE html>
-<html lang="id">
+<html class="light" lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Santree — Tumbuh Bersama Al-Qur'an</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Santree - Ngaji Jadi Petualangan Seru</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#3e4a3e",
+              "outline-variant": "#bdcabb",
+              "surface": "#faf9f4",
+              "on-tertiary-fixed": "#291800",
+              "surface-tint": "#006d33",
+              "primary-fixed": "#85fba2",
+              "inverse-on-surface": "#f2f1ec",
+              "tertiary-fixed-dim": "#ffb955",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#00210e",
+              "tertiary-container": "#a16900",
+              "on-primary-fixed-variant": "#005225",
+              "surface-container-highest": "#e3e3de",
+              "surface-container-low": "#f5f4ef",
+              "tertiary-fixed": "#ffddb4",
+              "error-container": "#ffdad6",
+              "error": "#ba1a1a",
+              "primary-container": "#008741",
+              "secondary": "#366847",
+              "surface-container": "#efeee9",
+              "inverse-primary": "#68dd88",
+              "on-background": "#1b1c19",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#9dd3aa",
+              "tertiary": "#805200",
+              "on-error-container": "#93000a",
+              "secondary-container": "#b8f0c5",
+              "secondary-fixed": "#b8f0c5",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#633f00",
+              "outline": "#6e7a6d",
+              "on-error": "#ffffff",
+              "on-secondary-fixed-variant": "#1d5031",
+              "surface-dim": "#dbdad5",
+              "primary-fixed-dim": "#68dd88",
+              "on-primary-fixed": "#00210b",
+              "surface-container-high": "#e9e8e3",
+              "background": "#faf9f4",
+              "surface-variant": "#e3e3de",
+              "on-secondary-container": "#3d6f4d",
+              "primary": "#006b32",
+              "surface-bright": "#faf9f4",
+              "on-surface": "#1b1c19",
+              "inverse-surface": "#30312e",
+              "on-tertiary-container": "#fffbff",
+              "on-primary-container": "#f7fff3"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
 <style>
-:root {
-  --green-deep: #1a4d2e;
-  --green: #25a355;
-  --green-mid: #3dc971;
-  --green-light: #e8f7ef;
-  --green-pale: #f0faf4;
-  --gold: #f5a623;
-  --gold-light: #fff8ed;
-  --brown: #8B5E3C;
-  --cream: #fdfcf7;
-  --text: #1a2e1e;
-  --muted: #5a7a62;
-  --white: #ffffff;
-  --r: 18px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
-
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 40px;
-  background: rgba(253,252,247,0.93);
-  backdrop-filter: blur(14px);
-  border-bottom: 1.5px solid rgba(37,163,85,0.1);
-}
-.nav-logo {
-  font-family: 'Fredoka One', cursive;
-  font-size: 26px; color: var(--green-deep);
-  display: flex; align-items: center; gap: 10px;
-}
-.nav-logo svg { width: 32px; height: 32px; }
-.nav-cta {
-  background: var(--green-deep); color: #fff;
-  border: none; border-radius: 99px;
-  padding: 11px 26px; font-size: 14px; font-weight: 800;
-  cursor: pointer; font-family: 'Nunito', sans-serif;
-  transition: transform 0.15s, box-shadow 0.15s;
-  text-decoration: none; display: inline-block;
-}
-.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,77,46,0.3); }
-
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: grid; grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 100px 60px 60px;
-  gap: 40px;
-  position: relative; overflow: hidden;
-}
-.hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background: radial-gradient(ellipse 80% 60% at 60% 100%, rgba(37,163,85,0.08) 0%, transparent 70%),
-              radial-gradient(ellipse 50% 40% at 10% 50%, rgba(245,166,35,0.06) 0%, transparent 60%);
-}
-.hero-left { position: relative; z-index: 1; }
-.hero-right { position: relative; z-index: 1; display: flex; justify-content: center; }
-
-.launch-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--gold-light); color: #b07a10;
-  border: 1.5px solid rgba(245,166,35,0.3);
-  border-radius: 99px; padding: 8px 18px;
-  font-size: 13px; font-weight: 800;
-  margin-bottom: 24px;
-  animation: fadeUp 0.5s ease both;
-}
-.launch-pill .star { color: var(--gold); font-size: 14px; }
-
-h1 {
-  font-family: 'Fredoka One', cursive;
-  font-size: clamp(44px, 5.5vw, 72px);
-  line-height: 1.1; color: var(--green-deep);
-  margin-bottom: 20px;
-  animation: fadeUp 0.5s 0.1s ease both;
-}
-h1 .green { color: var(--green); }
-h1 .gold { color: var(--gold); }
-
-.hero-desc {
-  font-size: 18px; color: var(--muted);
-  line-height: 1.7; max-width: 480px;
-  margin-bottom: 36px;
-  animation: fadeUp 0.5s 0.2s ease both;
-}
-
-.hero-btns {
-  display: flex; gap: 14px; flex-wrap: wrap;
-  animation: fadeUp 0.5s 0.3s ease both;
-}
-.btn-main {
-  background: var(--green-deep); color: #fff;
-  border: none; border-radius: 99px;
-  padding: 16px 34px; font-size: 16px; font-weight: 800;
-  cursor: pointer; font-family: 'Nunito', sans-serif;
-  transition: transform 0.15s, box-shadow 0.15s;
-  display: inline-flex; align-items: center; gap: 10px;
-}
-.btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(26,77,46,0.3); }
-.btn-ghost {
-  background: transparent; color: var(--green-deep);
-  border: 2px solid rgba(26,77,46,0.2); border-radius: 99px;
-  padding: 16px 34px; font-size: 16px; font-weight: 700;
-  cursor: pointer; font-family: 'Nunito', sans-serif;
-  transition: all 0.15s;
-}
-.btn-ghost:hover { background: var(--green-light); border-color: var(--green); }
-
-.hero-trust {
-  margin-top: 40px; display: flex; align-items: center; gap: 12px;
-  font-size: 13px; color: var(--muted); font-weight: 600;
-  animation: fadeUp 0.5s 0.4s ease both;
-}
-.trust-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-mid); display: inline-block; animation: pulse 1.5s ease infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
-
-/* TREE SVG */
-.tree-wrap {
-  animation: fadeUp 0.6s 0.2s ease both;
-}
-
-/* STATS BAR */
-.stats-bar {
-  display: flex; justify-content: center;
-  background: var(--green-deep);
-  padding: 0;
-}
-.stats-inner {
-  display: flex; width: 100%; max-width: 1100px;
-}
-.stat-item {
-  flex: 1; padding: 32px 20px; text-align: center;
-  border-right: 1px solid rgba(255,255,255,0.1);
-}
-.stat-item:last-child { border-right: none; }
-.stat-n {
-  font-family: 'Fredoka One', cursive;
-  font-size: 40px; color: var(--green-mid); line-height: 1;
-}
-.stat-l { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; font-weight: 700; }
-
-/* SECTIONS */
-.section { padding: 96px 40px; max-width: 1100px; margin: 0 auto; }
-.badge {
-  display: inline-block;
-  background: var(--green-light); color: var(--green);
-  border-radius: 99px; padding: 6px 16px;
-  font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.badge-gold { background: var(--gold-light); color: #b07a10; }
-h2 {
-  font-family: 'Fredoka One', cursive;
-  font-size: clamp(30px, 4vw, 50px);
-  color: var(--green-deep); line-height: 1.2; margin-bottom: 14px;
-}
-.section-sub { font-size: 18px; color: var(--muted); line-height: 1.65; max-width: 520px; }
-
-/* HOW */
-.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
-.step-card {
-  background: var(--white); border-radius: var(--r);
-  border: 1.5px solid rgba(37,163,85,0.12);
-  padding: 32px 28px; position: relative; overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.step-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(26,77,46,0.1); }
-.step-num {
-  font-family: 'Fredoka One', cursive;
-  font-size: 80px; color: var(--green-light);
-  position: absolute; top: -10px; right: 16px; line-height: 1;
-}
-.step-icon { font-size: 40px; margin-bottom: 18px; display: block; }
-.step-card h3 { font-size: 20px; font-weight: 800; color: var(--green-deep); margin-bottom: 10px; }
-.step-card p { font-size: 15px; color: var(--muted); line-height: 1.65; }
-
-/* FEATURES */
-.features-bg { background: var(--green-pale); }
-.features-inner { max-width: 1100px; margin: 0 auto; padding: 96px 40px; }
-.feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; margin-top: 56px; }
-.feat {
-  background: var(--white); border-radius: var(--r);
-  border: 1.5px solid rgba(37,163,85,0.1);
-  padding: 28px; transition: transform 0.2s;
-}
-.feat:hover { transform: translateY(-3px); }
-.feat-icon {
-  width: 52px; height: 52px; border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px; margin-bottom: 16px;
-}
-.fi-g { background: #e8f7ef; }
-.fi-y { background: #fff8ed; }
-.fi-b { background: #e8f0ff; }
-.fi-p { background: #fce8f3; }
-.feat h3 { font-size: 17px; font-weight: 800; color: var(--green-deep); margin-bottom: 8px; }
-.feat p { font-size: 14px; color: var(--muted); line-height: 1.65; }
-
-/* PERSONA */
-.persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
-.persona {
-  border-radius: var(--r); padding: 36px 28px;
-  border: 2px solid transparent; transition: transform 0.2s;
-}
-.persona:hover { transform: translateY(-4px); }
-.p-anak { background: #fff8ed; border-color: rgba(245,166,35,0.3); }
-.p-ortu { background: var(--green-light); border-color: rgba(37,163,85,0.3); }
-.p-ustadz { background: #eef2ff; border-color: rgba(99,102,241,0.3); }
-.persona-em { font-size: 52px; display: block; margin-bottom: 16px; }
-.p-role { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
-.r-anak { color: #b07a10; }
-.r-ortu { color: var(--green); }
-.r-ustadz { color: #5b5fe6; }
-.persona h3 { font-size: 20px; font-weight: 800; color: var(--green-deep); margin-bottom: 10px; }
-.persona p { font-size: 15px; color: var(--muted); line-height: 1.65; }
-
-/* OPEN SOURCE */
-.os-wrap { background: var(--green-deep); }
-.os-inner {
-  max-width: 1100px; margin: 0 auto; padding: 80px 40px;
-  display: flex; align-items: center; gap: 60px;
-}
-.os-text { flex: 1; }
-.os-text h2 { color: #fff; }
-.os-text p { color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.7; margin-top: 14px; }
-.os-pills { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-.os-pill {
-  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
-  border: 1px solid rgba(255,255,255,0.15); border-radius: 99px;
-  padding: 8px 18px; font-size: 13px; font-weight: 700;
-}
-.os-badge {
-  flex: 0 0 auto; width: 180px; height: 180px;
-  background: rgba(255,255,255,0.06); border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.1);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center;
-}
-.os-badge span { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--green-mid); }
-.os-badge small { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 700; margin-top: 4px; }
-
-/* WAITLIST */
-.wl-wrap { background: var(--green); }
-.wl-inner { max-width: 680px; margin: 0 auto; padding: 96px 40px; text-align: center; }
-.wl-inner h2 { color: #fff; margin-bottom: 14px; }
-.wl-inner p { color: rgba(255,255,255,0.75); font-size: 17px; line-height: 1.65; margin-bottom: 40px; }
-.wl-form { display: flex; gap: 12px; flex-wrap: wrap; }
-.wl-form input {
-  flex: 1; min-width: 180px;
-  padding: 16px 20px; border-radius: 99px; border: none;
-  font-size: 15px; font-family: 'Nunito', sans-serif; color: var(--text);
-  outline: none;
-}
-.wl-form input:focus { box-shadow: 0 0 0 3px rgba(255,255,255,0.4); }
-.btn-wl {
-  background: var(--green-deep); color: #fff;
-  border: none; border-radius: 99px;
-  padding: 16px 28px; font-size: 15px; font-weight: 800;
-  cursor: pointer; font-family: 'Nunito', sans-serif;
-  white-space: nowrap; transition: transform 0.15s, box-shadow 0.15s;
-}
-.btn-wl:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
-.wl-note { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 14px; }
-.wl-success {
-  display: none; margin-top: 20px;
-  background: rgba(255,255,255,0.15); border-radius: 14px;
-  padding: 18px; color: #fff; font-size: 15px; font-weight: 700;
-}
-.wl-share { margin-top: 36px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.2); }
-.wl-share p { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
-.btn-share {
-  background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3);
-  color: #fff; border-radius: 99px;
-  padding: 12px 28px; font-size: 14px; font-weight: 800;
-  cursor: pointer; font-family: 'Nunito', sans-serif;
-  transition: background 0.15s;
-}
-.btn-share:hover { background: rgba(255,255,255,0.25); }
-
-/* FOOTER */
-footer { background: var(--green-deep); padding: 40px; text-align: center; }
-.footer-logo { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--green-mid); margin-bottom: 8px; }
-footer p { font-size: 13px; color: rgba(255,255,255,0.3); }
-
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(22px); }
-  to { opacity:1; transform:translateY(0); }
-}
-
-@media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; padding: 90px 24px 48px; text-align: center; }
-  .hero-right { display: none; }
-  .hero-btns { justify-content: center; }
-  .hero-trust { justify-content: center; }
-  .steps { grid-template-columns: 1fr; }
-  .persona-grid { grid-template-columns: 1fr; }
-  .os-inner { flex-direction: column; text-align: center; }
-  nav { padding: 14px 20px; }
-  .section { padding: 64px 24px; }
-}
-</style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .text-shadow-sm {
+            text-shadow: 0 2px 4px rgba(0, 107, 50, 0.1);
+        }
+        .organic-shape {
+            border-radius: 60% 40% 70% 30% / 40% 50% 60% 50%;
+        }
+        .tactile-button {
+            box-shadow: 0 4px 0px 0px #005225;
+            transition: all 0.1s ease-out;
+        }
+        .tactile-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0px 0px #005225;
+        }
+        .floating-star {
+            filter: drop-shadow(0 0 8px rgba(255, 185, 85, 0.4));
+        }
+    </style>
 </head>
-<body>
-
-<nav>
-  <div class="nav-logo">
-    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="14" y="20" width="4" height="10" rx="2" fill="#8B5E3C"/>
-      <ellipse cx="16" cy="14" rx="10" ry="9" fill="#25a355"/>
-      <ellipse cx="10" cy="17" rx="7" ry="6" fill="#1a9e50"/>
-      <ellipse cx="22" cy="17" rx="7" ry="6" fill="#1a9e50"/>
-      <ellipse cx="16" cy="11" rx="7" ry="7" fill="#3dc971"/>
-      <polygon points="16,5 17.5,9.5 22,9.5 18.5,12 20,16.5 16,13.5 12,16.5 13.5,12 10,9.5 14.5,9.5" fill="#f5a623"/>
-    </svg>
-    Santree
-  </div>
-  <a href="#waitlist" class="nav-cta">Daftar Gratis</a>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Navigation Shell: TopAppBar (Floating) -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center max-w-2xl mx-auto rounded-full mt-4 mx-4 px-6 py-3 border border-white/20 bg-white/70 dark:bg-emerald-950/70 backdrop-blur-xl shadow-[0px_20px_40px_rgba(0,107,50,0.08)]">
+<div class="text-2xl font-black text-emerald-800 dark:text-emerald-200 tracking-tighter font-headline">Santree</div>
+<div class="hidden md:flex items-center gap-8 font-headline font-bold tracking-tight">
+<a class="text-emerald-900 dark:text-emerald-50 scale-105 transition-all" href="#">Home</a>
+<a class="text-emerald-600/70 dark:text-emerald-400/70 hover:scale-105 hover:bg-white/90 dark:hover:bg-emerald-800/90 transition-all px-3 py-1 rounded-full" href="#">Explore</a>
+<a class="text-emerald-600/70 dark:text-emerald-400/70 hover:scale-105 hover:bg-white/90 dark:hover:bg-emerald-800/90 transition-all px-3 py-1 rounded-full" href="#">Quests</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-emerald-700 dark:text-emerald-400 cursor-pointer" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="material-symbols-outlined text-emerald-700 dark:text-emerald-400 cursor-pointer">local_fire_department</span>
+</div>
 </nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-left">
-    <div class="launch-pill">
-      <span class="star">⭐</span> Hadir 1 Syawal 1446 H
-    </div>
-    <h1>Ngaji setiap hari,<br><span class="green">tumbuh</span> seperti<br>pohon yang <span class="gold">kuat</span></h1>
-    <p class="hero-desc">Santree mengubah perjalanan belajar Al-Qur'an anak jadi petualangan seru — dengan quest, level, dan reward. Jalan terus 365 hari, di TPQ, di rumah, maupun saat libur.</p>
-    <div class="hero-btns">
-      <button class="btn-main" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
-        🌱 Daftar Sekarang — Gratis
-      </button>
-      <button class="btn-ghost" onclick="document.getElementById('cara').scrollIntoView({behavior:'smooth'})">
-        Lihat cara kerjanya
-      </button>
-    </div>
-    <div class="hero-trust">
-      <span class="trust-dot"></span>
-      Open source · Gratis selamanya · Untuk anak 8–12 tahun
-    </div>
-  </div>
-  <div class="hero-right tree-wrap">
-    <svg width="380" height="400" viewBox="0 0 380 400" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="190" cy="385" rx="120" ry="14" fill="rgba(37,163,85,0.12)"/>
-      <rect x="178" y="270" width="24" height="110" rx="6" fill="#6B4226"/>
-      <rect x="183" y="258" width="14" height="80" rx="4" fill="#8B5E3C"/>
-      <path d="M160,290 Q148,268 170,272 Q158,248 190,254" stroke="#8B5E3C" stroke-width="7" fill="none" stroke-linecap="round"/>
-      <path d="M222,295 Q236,272 214,276 Q228,252 192,258" stroke="#8B5E3C" stroke-width="7" fill="none" stroke-linecap="round"/>
-      <ellipse cx="190" cy="200" rx="82" ry="76" fill="#1a7a3c"/>
-      <ellipse cx="148" cy="225" rx="62" ry="54" fill="#1a7a3c"/>
-      <ellipse cx="232" cy="228" rx="62" ry="54" fill="#1a7a3c"/>
-      <ellipse cx="190" cy="190" rx="74" ry="68" fill="#25a355"/>
-      <ellipse cx="148" cy="215" rx="55" ry="47" fill="#25a355"/>
-      <ellipse cx="232" cy="218" rx="54" ry="46" fill="#25a355"/>
-      <ellipse cx="184" cy="182" rx="58" ry="56" fill="#3dc971"/>
-      <ellipse cx="148" cy="205" rx="42" ry="38" fill="#3dc971"/>
-      <ellipse cx="228" cy="208" rx="40" ry="36" fill="#3dc971"/>
-      <ellipse cx="180" cy="170" rx="42" ry="38" fill="#7de4a8"/>
-      <ellipse cx="210" cy="175" rx="32" ry="28" fill="#7de4a8"/>
-      <polygon points="190,138 194,152 210,152 197,161 201,175 190,166 179,175 183,161 170,152 186,152" fill="#f5a623"/>
-      <polygon points="148,168 151,178 162,178 153,184 157,194 148,188 139,194 143,184 134,178 145,178" fill="#ffd580"/>
-      <polygon points="232,172 235,182 246,182 237,188 241,198 232,192 223,198 227,188 218,182 229,182" fill="#ffd580"/>
-      <g transform="translate(152,295)">
-        <rect x="0" y="0" width="36" height="56" rx="7" fill="#4a90d9"/>
-        <rect x="3" y="0" width="30" height="22" rx="5" fill="#3a78c2"/>
-        <ellipse cx="18" cy="-7" rx="13" ry="13" fill="#FDBCB4"/>
-        <rect x="5" y="-16" width="26" height="11" rx="5" fill="#2c3e50"/>
-        <rect x="-10" y="9" width="14" height="8" rx="4" fill="#3a78c2"/>
-        <rect x="32" y="9" width="14" height="8" rx="4" fill="#3a78c2"/>
-        <rect x="20" y="24" width="16" height="22" rx="4" fill="#fffde7"/>
-        <line x1="22" y1="29" x2="34" y2="29" stroke="#bfae80" stroke-width="1.5" fill="none"/>
-        <line x1="22" y1="33" x2="34" y2="33" stroke="#bfae80" stroke-width="1.5" fill="none"/>
-        <line x1="22" y1="37" x2="34" y2="37" stroke="#bfae80" stroke-width="1.5" fill="none"/>
-        <rect x="4" y="52" width="12" height="9" rx="4" fill="#3a78c2"/>
-        <rect x="20" y="52" width="12" height="9" rx="4" fill="#3a78c2"/>
-      </g>
-      <g transform="translate(196,298)">
-        <rect x="0" y="0" width="36" height="54" rx="7" fill="#e8a0b0"/>
-        <rect x="3" y="0" width="30" height="20" rx="5" fill="#d4708a"/>
-        <ellipse cx="18" cy="-7" rx="13" ry="13" fill="#FDBCB4"/>
-        <ellipse cx="18" cy="-17" rx="15" ry="8" fill="#d4708a"/>
-        <rect x="-10" y="9" width="14" height="8" rx="4" fill="#d4708a"/>
-        <rect x="32" y="9" width="14" height="8" rx="4" fill="#d4708a"/>
-        <rect x="2" y="24" width="16" height="22" rx="4" fill="#fffde7"/>
-        <line x1="4" y1="29" x2="16" y2="29" stroke="#bfae80" stroke-width="1.5" fill="none"/>
-        <line x1="4" y1="33" x2="16" y2="33" stroke="#bfae80" stroke-width="1.5" fill="none"/>
-        <line x1="4" y1="37" x2="16" y2="37" stroke="#bfae80" stroke-width="1.5" fill="none"/>
-        <rect x="4" y="50" width="12" height="9" rx="4" fill="#d4708a"/>
-        <rect x="20" y="50" width="12" height="9" rx="4" fill="#d4708a"/>
-      </g>
-    </svg>
-  </div>
+<main class="relative overflow-hidden">
+<!-- Hero Section: The Living Sanctuary -->
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6">
+<!-- Background Elements -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-b from-primary-fixed/20 to-transparent rounded-full blur-3xl opacity-30"></div>
+<!-- Floating Stars -->
+<div class="absolute top-[15%] left-[10%] floating-star text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute top-[25%] right-[15%] floating-star text-tertiary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<div class="absolute bottom-[20%] left-[20%] floating-star text-primary">
+<span class="material-symbols-outlined text-5xl">potted_plant</span>
+</div>
+</div>
+<div class="relative z-10 max-w-5xl w-full text-center">
+<h1 class="font-headline font-black text-6xl md:text-8xl text-on-primary-fixed-variant leading-tight tracking-tighter mb-8">
+                    Ngaji jadi <br/><span class="text-primary italic">petualangan</span> seru!
+                </h1>
+<!-- The 3D Tree and Characters Composition -->
+<div class="relative w-full max-w-4xl mx-auto h-[500px] mt-12">
+<!-- Central Tree Representation -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative w-80 h-full">
+<img alt="3D stylized oak tree with lush emerald leaves" class="w-full h-full object-contain rounded-full mask-image-v mask-gradient-b-transparent" data-alt="A magical 3D growing tree with glowing emerald leaves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNHlFjJPmjS5N1aZhmzsFsE-27oofKdrZwsVQoGzAnWIzMkSTvXbYn17gWYL5CaT1Yb_fI-7KyZkiIYMsQr-V6YNYDVIypdrZOPSA-wy9HcIZwycXzpQwDplQWHMwGk3ksTqeDsFWj2Pb6dfnSLBNV-wbwAritKldEgi35JrEZsEWvwlBb7EBG7xXL-rqiS4lx2wHrHEU5xQWTJm5S_ob3Iq6n0QSdIW_uN_FkwPJWUhqkk2Y0eRcp1GeK0zaQpAEIqMHHX7l-WNY"/>
+<!-- Overlay Characters -->
+<div class="absolute -left-12 bottom-10 w-48 h-48 bg-surface-container-low rounded-full overflow-hidden shadow-xl border-4 border-white">
+<img alt="Cheerful 3D boy explorer with a backpack" class="w-full h-full object-cover" data-alt="3D cartoon boy explorer character smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQFJg2FdCNJgCzoxY5VcI_2WBYhe-UrkoS6fxoHA0KK4ThXp5rsyWBYCnHTE7j3jjf8fv2wNzb2FW5IB9-mVRU97EbV5QRmGcgWNatGSDKOm1KHDxpIdQkz3I7lHjp7etTntKGJU_S0rdLjZzuNuJ5H-FID0kYgtNGWXlLCGjQKVKyo0lgHhnOopIjWoAr8apIXInmmEv3u1Zxw7Dcrypmna-RoJX3e2XganZObz5IEyetmBk2wdNMZ1u5X2IIaWarmKk4rDnyh8"/>
+</div>
+<div class="absolute -right-12 bottom-20 w-48 h-48 bg-surface-container-low rounded-full overflow-hidden shadow-xl border-4 border-white">
+<img alt="Cheerful 3D girl explorer holding a scroll" class="w-full h-full object-cover" data-alt="3D cartoon girl character with Islamic headscarf holding a scroll" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqzB3HrA2djxpoynv1TJLjOW-c7SZgYcD2nMtevpbdWozEaEEi6q4qJAsa-1hftNyQcgE3xUZOnWJcFq_I4VQAQbFIeep6ZdLk8IDbLPIfzq2fM_D6u2I841_RVTrHpU_lG67a55onDrH4nr4TyShj9L2dxjyTln8xNweX80QXgWYpneJUeBAaBhLG57Nes5MjDnHhBqZ05mxpQ52mvu1bblqOEr5--CLf0LhLFRZa_es2jTBo4dJ6ly_zqPvBBbOJq_hLi7Dqpuc"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="mt-16 flex flex-col items-center gap-6">
+<button class="tactile-button px-10 py-5 bg-primary-container text-on-primary font-headline font-extrabold text-xl rounded-full tracking-wide">
+                        Mulai Menanam Benih
+                    </button>
+<p class="text-on-surface-variant font-medium">Gratis untuk dicoba • Tersedia di App Store &amp; Play Store</p>
+</div>
+</div>
 </section>
-
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item"><div class="stat-n">100+</div><div class="stat-l">Quest tersedia</div></div>
-    <div class="stat-item"><div class="stat-n">3</div><div class="stat-l">Mode penggunaan</div></div>
-    <div class="stat-item"><div class="stat-n">365</div><div class="stat-l">Hari dalam setahun</div></div>
-    <div class="stat-item"><div class="stat-n">∞</div><div class="stat-l">Semangat ngaji</div></div>
-  </div>
+<!-- Feature Cards: Bento Grid Style -->
+<section class="py-24 px-6 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Quest System Card -->
+<div class="glass-panel group p-10 rounded-xl relative overflow-hidden shadow-[0px_20px_40px_rgba(0,107,50,0.05)] hover:shadow-[0px_30px_60px_rgba(0,107,50,0.12)] transition-all duration-500 hover:-translate-y-2">
+<div class="mb-6 w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center text-on-primary-fixed-variant rotate-[-3deg] group-hover:rotate-0 transition-transform">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">explore</span>
 </div>
-
-<!-- HOW IT WORKS -->
-<section class="section" id="cara">
-  <div class="badge">Cara kerja</div>
-  <h2>Semudah main game,<br>semanfaat ngaji beneran</h2>
-  <p class="section-sub">Tidak perlu install macam-macam. Cukup buka browser, langsung bisa dipakai.</p>
-  <div class="steps">
-    <div class="step-card">
-      <span class="step-num">1</span>
-      <span class="step-icon">🌱</span>
-      <h3>Tanam benih</h3>
-      <p>Buat profil anak dalam hitungan menit. Pilih level awal ngaji — dari Iqro 1 sampai Al-Qur'an. Pohon Santree-mu mulai tumbuh.</p>
-    </div>
-    <div class="step-card">
-      <span class="step-num">2</span>
-      <span class="step-icon">🗺️</span>
-      <h3>Ambil quest harian</h3>
-      <p>Setiap hari ada misi baru — baca 1 halaman, hafal surat pendek, baca doa. Simpel tapi konsisten, itulah kuncinya.</p>
-    </div>
-    <div class="step-card">
-      <span class="step-num">3</span>
-      <span class="step-icon">🌳</span>
-      <h3>Tumbuh & berbuah</h3>
-      <p>Orang tua atau ustadz verifikasi quest. Anak dapat EXP, naik level, pohonnya makin rimbun dan berbuah bintang emas.</p>
-    </div>
-  </div>
+<h3 class="font-headline font-extrabold text-2xl text-on-primary-fixed-variant mb-4">Quest System</h3>
+<p class="text-on-surface-variant leading-relaxed">Selesaikan misi harian membaca Al-Quran untuk membuka area taman baru yang ajaib.</p>
+<div class="mt-8 h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-primary-fixed w-[65%] rounded-full"></div>
+</div>
+</div>
+<!-- Daily Rewards Card -->
+<div class="bg-secondary-container/30 p-10 rounded-xl relative overflow-hidden shadow-[0px_20px_40px_rgba(0,107,50,0.05)] hover:shadow-[0px_30px_60px_rgba(0,107,50,0.12)] transition-all duration-500 hover:-translate-y-2">
+<div class="mb-6 w-16 h-16 bg-tertiary-fixed rounded-full flex items-center justify-center text-on-tertiary-fixed-variant rotate-[5deg] group-hover:rotate-0 transition-transform">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<h3 class="font-headline font-extrabold text-2xl text-on-primary-fixed-variant mb-4">Daily Rewards</h3>
+<p class="text-on-surface-variant leading-relaxed">Kumpulkan koin emas dan benih langka setiap kali kamu konsisten belajar setiap hari.</p>
+<div class="mt-8 flex gap-2">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-lg flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+</div>
+<div class="w-12 h-12 bg-tertiary-fixed rounded-lg flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+</div>
+</div>
+<!-- Parent Reports Card -->
+<div class="glass-panel group p-10 rounded-xl relative overflow-hidden shadow-[0px_20px_40px_rgba(0,107,50,0.05)] hover:shadow-[0px_30px_60px_rgba(0,107,50,0.12)] transition-all duration-500 hover:-translate-y-2">
+<div class="mb-6 w-16 h-16 bg-primary-container rounded-full flex items-center justify-center text-on-primary rotate-[-8deg] group-hover:rotate-0 transition-transform">
+<span class="material-symbols-outlined text-4xl">analytics</span>
+</div>
+<h3 class="font-headline font-extrabold text-2xl text-on-primary-fixed-variant mb-4">Parent Reports</h3>
+<p class="text-on-surface-variant leading-relaxed">Pantau perkembangan tahfidz dan kelancaran bacaan si kecil secara real-time dari HP Anda.</p>
+<div class="mt-8 bg-surface-container rounded-lg p-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-primary/20"></div>
+<div class="h-2 w-24 bg-primary/30 rounded-full"></div>
+</div>
+<div class="h-2 w-full bg-primary/10 rounded-full"></div>
+</div>
+</div>
+</div>
 </section>
-
-<!-- FEATURES -->
-<div class="features-bg">
-  <div class="features-inner">
-    <div class="badge">Fitur utama</div>
-    <h2>Dirancang bertahan<br>sepanjang tahun</h2>
-    <p class="section-sub">Bukan cuma momen Ramadan — Santree jalan setiap hari.</p>
-    <div class="feat-grid">
-      <div class="feat">
-        <div class="feat-icon fi-g">🏆</div>
-        <h3>Quest System</h3>
-        <p>Quest harian, mingguan, dan event spesial (Ramadan, Syawal, libur sekolah). Anak selalu punya target baru.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon fi-y">⭐</div>
-        <h3>Level & Badge</h3>
-        <p>Dari Santri Pemula sampai Hafidz Muda. Setiap pencapaian dirayakan dengan badge digital.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon fi-b">📊</div>
-        <h3>Progress Report</h3>
-        <p>Orang tua lihat perkembangan anak kapan saja — surat apa yang sudah hafal, streak berapa hari.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon fi-p">🕌</div>
-        <h3>Mode TPQ</h3>
-        <p>Ustadz kelola seluruh murid dari satu dashboard. Assign quest kelas, verifikasi setoran, leaderboard.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon fi-g">🏠</div>
-        <h3>Mode Rumah</h3>
-        <p>Pas TPQ libur, orang tua ambil alih. Quest tetap jalan, streak tetap terjaga, pohon tetap tumbuh.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon fi-y">🌙</div>
-        <h3>Event Musiman</h3>
-        <p>Quest spesial di Ramadan, Syawal, dan hari besar Islam lainnya. Selalu ada alasan untuk semangat.</p>
-      </div>
-    </div>
-  </div>
+<!-- Social Proof Section -->
+<section class="py-20 px-6 bg-surface-container-low/50">
+<div class="max-w-4xl mx-auto text-center">
+<div class="flex justify-center -space-x-4 mb-8">
+<div class="w-16 h-16 rounded-full border-4 border-white bg-secondary-fixed overflow-hidden">
+<img alt="Profile" data-alt="Close up of a smiling child face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArjSTX6OJ0_K1mABHijU5U19PbV4kG-VKQwkA8dRu5cWdZzGrL2z32o-8oBoi698OOZGxD1z1P1aSLPxj0o0X2lOdPaqZHYeLhhcJhgeAZHjEUPAbOT4vuQDkusZI2XjVS8nGN48Di0NuvZUmoPgKwIu1b-_MIixwaMwJLIA3negGH80ekE8zF4Mm4kOyNynnKwaBxBic5tGSDUXJgJQOcmkUb161bPRPnvGcoRn7t01_fEwEUEJ5fkeucjXubU2SeeBU4JNY0Zq8"/>
 </div>
-
-<!-- PERSONA -->
-<section class="section">
-  <div class="badge">Untuk siapa</div>
-  <h2>Satu app, tiga pemain</h2>
-  <p class="section-sub">Santree dirancang agar semua pihak terlibat dan merasakan manfaatnya.</p>
-  <div class="persona-grid">
-    <div class="persona p-anak">
-      <span class="persona-em">🧒</span>
-      <div class="p-role r-anak">Anak 8–12 tahun</div>
-      <h3>Si Pemain</h3>
-      <p>Ngaji terasa seperti naik level di game favorit. Setiap bacaan dan hafalan adalah langkah menuju Hafidz Muda.</p>
-    </div>
-    <div class="persona p-ortu">
-      <span class="persona-em">👨‍👩‍👦</span>
-      <div class="p-role r-ortu">Orang Tua</div>
-      <h3>Si Pengawas Setia</h3>
-      <p>Akhirnya bisa lihat perkembangan ngaji anak dengan jelas — bukan cuma "katanya sudah hafal". Verifikasi langsung dari HP.</p>
-    </div>
-    <div class="persona p-ustadz">
-      <span class="persona-em">👳</span>
-      <div class="p-role r-ustadz">Ustadz / Ustadzah</div>
-      <h3>Si Pemandu</h3>
-      <p>Tidak perlu catat manual di buku. Progress seluruh murid terpantau rapi dalam satu dashboard.</p>
-    </div>
-  </div>
+<div class="w-16 h-16 rounded-full border-4 border-white bg-primary-fixed overflow-hidden">
+<img alt="Profile" data-alt="Close up of a smiling girl face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoGR-aGJPwD_Dr-2sZ6V8LekES17QUJkcT84WVQCbuKttGqIn-Y3bKAfNkKJDsWuUzcOfhFqdaClksEuSccPM9uvikMRiudfB3qu7GJcgijrVh2G_c3UkvoWZNHAI-yy03e0DYnyfdQo_WsCDV-loQgP8GrfEB7brz8aygXumnKHRPYbyXE1tkNfWtZ0LDOI0LdwNkRHte2Fd94lz2P1NkzVPJmI4dwgQfAqtdEY5nqGBOLMvoVBMTyY9W8I5XukQuGW4lG0hutk"/>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-white bg-tertiary-fixed overflow-hidden">
+<img alt="Profile" data-alt="Close up of a happy boy face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtwytVvDWSwkVWFnj759IJFeJUnMOi3IM4pv0shLSqZeGxFNMfwlk8UqesdDe9xxUcVAugipxSte8Vf7IdxNB4l4klRxdJlnAZLGAqWAFvFthtZBCs5Rvnx_0vuur4yGPA7Id_8LSjvZxWyD4dmNyqeRrHgWlRW3HxW9N0LFvyQwdOa-yrmo7icKbdyKdX9QbX9W_wfnGJsWQvzcYMwa6XVq_MVnVh3o8AprBJUP7MXWQyXTijWCUp8m5NR9o8LXoXvVbZRT0oIjg"/>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-white bg-surface-container-highest flex items-center justify-center font-bold text-on-surface-variant">
+                        +10k
+                    </div>
+</div>
+<h2 class="font-headline font-black text-4xl text-on-primary-fixed-variant mb-4">Trusted by 10,000+ families</h2>
+<p class="text-xl text-on-surface-variant font-medium">Bergabunglah dengan komunitas orang tua yang menjadikan belajar agama sebagai momen yang dinanti-nanti.</p>
+</div>
 </section>
-
-<!-- OPEN SOURCE -->
-<div class="os-wrap">
-  <div class="os-inner">
-    <div class="os-text">
-      <div class="badge" style="background:rgba(61,201,113,0.15);color:#3dc971;">Open Source</div>
-      <h2>Dibangun bersama,<br>untuk semua</h2>
-      <p>Santree adalah proyek open source. Siapa pun bisa berkontribusi — dari ustadz yang tambah konten quest, hingga developer yang perbaiki fitur. Kode terbuka, hati terbuka.</p>
-      <div class="os-pills">
-        <span class="os-pill">Next.js</span>
-        <span class="os-pill">Supabase</span>
-        <span class="os-pill">Tailwind CSS</span>
-        <span class="os-pill">MIT License</span>
-      </div>
-    </div>
-    <div class="os-badge">
-      <span>🔓</span>
-      <span style="font-family:'Fredoka One',cursive;font-size:22px;color:#3dc971;">Open</span>
-      <small>Source</small>
-      <small>Gratis selamanya</small>
-    </div>
-  </div>
+<!-- Final Call to Action -->
+<section class="py-32 px-6 relative overflow-hidden">
+<div class="absolute inset-0 z-0 bg-primary/5 rounded-[5rem] mx-4 my-8"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<div class="inline-block px-4 py-2 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-bold text-sm mb-6 uppercase tracking-widest">Waktunya Menanam</div>
+<h2 class="font-headline font-black text-5xl md:text-7xl text-on-primary-fixed-variant mb-10">Siap untuk memulai <br/>petualangan si kecil?</h2>
+<button class="tactile-button relative group px-12 py-7 bg-primary-container rounded-full overflow-hidden shadow-[0px_20px_40px_rgba(0,107,50,0.2)]">
+<span class="relative z-10 font-headline font-black text-2xl text-on-primary">Mulai Menanam Benih</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-primary-container opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<!-- Internal Glow -->
+<div class="absolute top-0 left-0 w-full h-1/2 bg-white/10 blur-xl"></div>
+</button>
+<div class="mt-12 flex justify-center gap-10 opacity-60 grayscale hover:grayscale-0 transition-all">
+<span class="material-symbols-outlined text-4xl">ios</span>
+<span class="material-symbols-outlined text-4xl">play_apps</span>
 </div>
-
-<!-- WAITLIST -->
-<div class="wl-wrap" id="waitlist">
-  <div class="wl-inner">
-    <div class="badge badge-gold" style="background:rgba(255,255,255,0.2);color:#fff8d0;border:1.5px solid rgba(255,255,255,0.3);">🌟 Early Access</div>
-    <h2>Jadilah yang pertama<br>menanam benih</h2>
-    <p>Daftar sekarang dan dapatkan akses pertama saat Santree siap. Gratis selamanya untuk pengguna awal.</p>
-    <div class="wl-form">
-      <input type="text" id="nama" placeholder="Nama orang tua / ustadz" />
-      <input type="text" id="wa" placeholder="Nomor WhatsApp" />
-      <button class="btn-wl" onclick="daftar()">Daftar →</button>
-    </div>
-    <p class="wl-note">Tanpa spam. Kami hubungi hanya saat app siap diluncurkan.</p>
-    <div class="wl-success" id="success">🎉 Terima kasih sudah daftar! Kami hubungi via WhatsApp saat Santree siap.</div>
-    <div class="wl-share">
-      <p>Atau ajak sesama orang tua & ustadz:</p>
-      <button class="btn-share" onclick="share()">📲 Share via WhatsApp</button>
-    </div>
-  </div>
 </div>
-
-<footer>
-  <div class="footer-logo">🌳 Santree</div>
-  <p>Tumbuh bersama Al-Qur'an · Open Source · Gratis Selamanya</p>
-  <p style="margin-top:8px;">Dibuat dengan ❤️ untuk anak-anak Indonesia</p>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface py-16 px-6 border-t border-outline-variant/10">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-2">
+<div class="text-3xl font-black text-primary tracking-tighter mb-6 font-headline">Santree</div>
+<p class="text-on-surface-variant max-w-sm font-medium">Membangun generasi qurani dengan pendekatan gamifikasi yang menyenangkan, aman, dan edukatif.</p>
+</div>
+<div>
+<h4 class="font-headline font-extrabold text-on-primary-fixed-variant mb-6 uppercase tracking-wider text-sm">Produk</h4>
+<ul class="space-y-4 font-medium text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Adventure Map</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Daily Quests</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Laporan Orang Tua</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-extrabold text-on-primary-fixed-variant mb-6 uppercase tracking-wider text-sm">Bantuan</h4>
+<ul class="space-y-4 font-medium text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Pusat Bantuan</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Hubungi Kami</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privasi</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-outline-variant/5 text-center text-on-surface-variant/50 text-sm font-medium">
+            © 2024 Santree Global. All rights reserved. Dibuat dengan cinta di Indonesia.
+        </div>
 </footer>
-
-<script>
-function daftar() {
-  const nama = document.getElementById('nama').value.trim();
-  const wa = document.getElementById('wa').value.trim();
-  if (!nama || !wa) { alert('Mohon isi nama dan nomor WhatsApp dulu ya!'); return; }
-  document.getElementById('success').style.display = 'block';
-  document.getElementById('nama').value = '';
-  document.getElementById('wa').value = '';
-}
-function share() {
-  const t = encodeURIComponent('🌳 Santree — Ngaji jadi petualangan seru untuk anak!\n\nApp gamifikasi Al-Qur\'an untuk anak 8–12 tahun. Ada quest, level, badge, dan progress report buat orang tua & ustadz.\n\nDaftar duluan (gratis): https://santree.id');
-  window.open('https://wa.me/?text=' + t, '_blank');
-}
-</script>
 </body>
 </html>
