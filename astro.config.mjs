@@ -8,5 +8,7 @@ export default defineConfig({
     applyBaseStyles: false, // We'll use custom styles from landing page
   })],
   output: 'hybrid', // Enable API routes
-  adapter: vercel(),
+  adapter: vercel({
+    runtime: 'nodejs20.x',
+  }),
 });
