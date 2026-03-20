@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartu Quest Santree - Print Template</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .page-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .page-info h1 {
+            font-size: 24px;
+            color: #1a4d2e;
+            margin-bottom: 5px;
+        }
+
+        .page-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        /* Grid untuk 9 kartu per halaman (3x3) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8mm;
+            margin-bottom: 20px;
+        }
+
+        /* Kartu Quest */
+        .quest-card {
+            width: 100%;
+            aspect-ratio: 2.5 / 3.5; /* Proporsi kartu trading card */
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
+        }
+
+        /* Header kartu dengan kategori */
+        .card-header {
+            padding: 8px 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header .category {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-header .exp {
+            font-size: 11px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Warna kategori */
+        .cat-shalat { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+        .cat-hafalan { background: linear-gradient(135deg, #10B981, #059669); }
+        .cat-doa { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+        .cat-adab { background: linear-gradient(135deg, #EC4899, #DB2777); }
+        .cat-diniyyah { background: linear-gradient(135deg, #F59E0B, #D97706); }
+        .cat-science { background: linear-gradient(135deg, #14B8A6, #0D9488); }
+        .cat-lifeskill { background: linear-gradient(135deg, #EF4444, #DC2626); }
+
+        /* Body kartu */
+        .card-body {
+            padding: 12px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #1a4d2e;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            min-height: 32px;
+        }
+
+        .card-description {
+            font-size: 9px;
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            min-height: 50px;
+        }
+
+        /* Ilustrasi tengah */
+        .card-illustration {
+            text-align: center;
+            font-size: 40px;
+            margin: 8px 0;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Verifikasi section */
+        .card-verification {
+            background: #f8f8f8;
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 8px;
+        }
+
+        .verification-title {
+            font-size: 8px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .verification-text {
+            font-size: 8px;
+            color: #555;
+            line-height: 1.3;
+        }
+
+        /* Footer dengan QR code placeholder */
+        .card-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            background: #fafafa;
+            border-top: 1px dashed #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-footer .qr-code {
+            width: 35px;
+            height: 35px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #999;
+        }
+
+        .card-footer .santree-logo {
+            font-size: 9px;
+            color: #25a355;
+            font-weight: bold;
+        }
+
+        /* Checkbox untuk verifikasi manual */
+        .verification-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .verification-checkbox .checkbox {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #25a355;
+            border-radius: 3px;
+        }
+
+        .verification-checkbox label {
+            font-size: 8px;
+            color: #666;
+        }
+
+        /* Print button */
+        .print-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25a355;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 163, 85, 0.4);
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #1a7a3c;
+        }
+
+        /* Divider untuk potong */
+        .cut-line {
+            border-top: 1px dashed #ccc;
+            margin: 10mm 0;
+            position: relative;
+        }
+
+        .cut-line::before {
+            content: "✂️ Potong di sini";
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 10px;
+            font-size: 10px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-info no-print">
+        <h1>🌳 Kartu Quest Santree</h1>
+        <p>Template untuk print sendiri - 9 kartu per halaman (A4)</p>
+    </div>
+
+    <div class="instructions no-print">
+        <h3>📋 Cara Menggunakan:</h3>
+        <ol>
+            <li>Klik tombol "Print Kartu" di pojok kanan bawah</li>
+            <li>Pilih printer dan pastikan ukuran kertas A4</li>
+            <li>Print pada kertas tebal (180-220 gsm) agar lebih awet</li>
+            <li>Gunting mengikuti garis potong</li>
+            <li>Kartu siap digunakan untuk quest harian!</li>
+        </ol>
+    </div>
+
+    <!-- Set 1: Halaman 1 - Quest Shalat & Hafalan -->
+    <div class="card-grid">
+        <!-- Kartu 1 -->
+        <div class="quest-card">
+            <div class="card-header cat-shalat">
+                <div class="category">
+                    <span>🕌</span>
+                    <span>Shalat</span>
+                </div>
+                <div class="exp">+100 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Subuh Berjamaah 5 Hari</div>
+                <div class="card-description">
+                    Shalat Subuh berjamaah bersama Ayah atau Ibu selama 5 hari berturut-turut. Konsistensi adalah kunci!
+                </div>
+                <div class="card-illustration">🌅</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Orang tua konfirmasi setiap hari setelah shalat Subuh berjamaah</div>
+                    <div class="verification-checkbox">
+                        <div class="checkbox"></div>
+                        <label>Hari 1 2 3 4 5</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 2 -->
+        <div class="quest-card">
+            <div class="card-header cat-hafalan">
+                <div class="category">
+                    <span>📖</span>
+                    <span>Hafalan</span>
+                </div>
+                <div class="exp">+50 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Hafal Surat Al-Ikhlas</div>
+                <div class="card-description">
+                    Hafalkan surat Al-Ikhlas dengan lancar, tanpa melihat mushaf. Pastikan makhraj dan tajwidnya benar.
+                </div>
+                <div class="card-illustration">☝️</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Rekam bacaan dengan voice memo, atau dengarkan langsung</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 3 -->
+        <div class="quest-card">
+            <div class="card-header cat-hafalan">
+                <div class="category">
+                    <span>📖</span>
+                    <span>Hafalan</span>
+                </div>
+                <div class="exp">+80 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Baca Al-Qur'an 1 Halaman</div>
+                <div class="card-description">
+                    Baca Al-Qur'an minimal 1 halaman dengan tartil. Perhatikan tajwid dan makhraj huruf.
+                </div>
+                <div class="card-illustration">📚</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Foto halaman yang dibaca, atau lapor langsung ke orang tua</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 4 -->
+        <div class="quest-card">
+            <div class="card-header cat-doa">
+                <div class="category">
+                    <span>🤲</span>
+                    <span>Doa</span>
+                </div>
+                <div class="exp">+30 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Hafal Doa Sebelum Makan</div>
+                <div class="card-description">
+                    Hafalkan doa sebelum makan dan ucapkan setiap kali mau makan selama 3 hari.
+                </div>
+                <div class="card-illustration">🍽️</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Orang tua dengarkan bacaan doa sebelum makan bersama</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 5 -->
+        <div class="quest-card">
+            <div class="card-header cat-adab">
+                <div class="category">
+                    <span>💚</span>
+                    <span>Adab</span>
+                </div>
+                <div class="exp">+40 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Bantu Ibu Masak Sahur</div>
+                <div class="card-description">
+                    Bantu Ibu persiapan sahur tanpa diminta, minimal 3 kali dalam seminggu. Tunjukkan inisiatif!
+                </div>
+                <div class="card-illustration">🍳</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Foto kegiatan membantu + konfirmasi dari Ibu</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 6 -->
+        <div class="quest-card">
+            <div class="card-header cat-diniyyah">
+                <div class="category">
+                    <span>📚</span>
+                    <span>Diniyyah</span>
+                </div>
+                <div class="exp">+60 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Kisah Nabi Ibrahim AS</div>
+                <div class="card-description">
+                    Ceritakan kembali kisah Nabi Ibrahim AS dengan bahasa sendiri kepada orang tua.
+                </div>
+                <div class="card-illustration">📜</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Cerita ke orang tua, rekam voice memo atau tulis ringkasan</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 7 -->
+        <div class="quest-card">
+            <div class="card-header cat-science">
+                <div class="category">
+                    <span>🔬</span>
+                    <span>Science</span>
+                </div>
+                <div class="exp">+70 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Amati Fase Bulan</div>
+                <div class="card-description">
+                    Amati bulan malam ini, gambar bentuknya. Kenapa bentuknya beda setiap malam?
+                </div>
+                <div class="card-illustration">🌙</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Foto gambar bulan + penjelasan singkat kenapa bentuknya berubah</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 8 -->
+        <div class="quest-card">
+            <div class="card-header cat-lifeskill">
+                <div class="category">
+                    <span>🛠️</span>
+                    <span>Life Skill</span>
+                </div>
+                <div class="exp">+50 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Rapikan Kamar Sendiri</div>
+                <div class="card-description">
+                    Rapikan dan bersihkan kamar sendiri tanpa diminta, minimal 3 hari berturut-turut.
+                </div>
+                <div class="card-illustration">🧹</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Foto kamar before & after, konfirmasi orang tua</div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+
+        <!-- Kartu 9 -->
+        <div class="quest-card">
+            <div class="card-header cat-shalat">
+                <div class="category">
+                    <span>🕌</span>
+                    <span>Shalat</span>
+                </div>
+                <div class="exp">+80 EXP</div>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Shalat Dhuha 3 Hari</div>
+                <div class="card-description">
+                    Kerjakan shalat Dhuha minimal 2 rakaat selama 3 hari berturut-turut di pagi hari.
+                </div>
+                <div class="card-illustration">☀️</div>
+                <div class="card-verification">
+                    <div class="verification-title">✓ Cara Verifikasi:</div>
+                    <div class="verification-text">Lapor ke orang tua setiap selesai shalat Dhuha</div>
+                    <div class="verification-checkbox">
+                        <div class="checkbox"></div>
+                        <label>Hari 1 2 3</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="qr-code">QR</div>
+                <div class="santree-logo">🌳 Santree</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cut-line no-print"></div>
+
+    <button class="print-button no-print" onclick="window.print()">🖨️ Print Kartu</button>
+
+    <script>
+        // Auto hide print button when printing
+        window.onbeforeprint = function() {
+            document.querySelector('.print-button').style.display = 'none';
+        };
+        window.onafterprint = function() {
+            document.querySelector('.print-button').style.display = 'block';
+        };
+    </script>
+
+</body>
+</html>
